@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<robot name="simple_manipulator">
+    <!-- Base Link -->
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.1" radius="0.3"/>
+            </geometry>
+            <material name="dark_grey">
+                <color rgba="0.2 0.2 0.2 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.1" radius="0.3"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="5.0"/>
+            <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <!-- Arm Base -->
+    <link name="arm_base">
+        <visual>
+            <geometry>
+                <cylinder length="0.2" radius="0.1"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 0.8 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.2" radius="0.1"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.0"/>
+            <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+        </inertial>
+    </link>
+
+    <!-- Upper Arm -->
+    <link name="upper_arm">
+        <visual>
+            <geometry>
+                <box size="0.1 0.1 0.4"/>
+            </geometry>
+            <material name="red">
+                <color rgba="0.8 0 0 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.1 0.4"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.0"/>
+            <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+        </inertial>
+    </link>
+
+    <!-- Forearm -->
+    <link name="forearm">
+        <visual>
+            <geometry>
+                <box size="0.1 0.1 0.3"/>
+            </geometry>
+            <material name="green">
+                <color rgba="0 0.8 0 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.1 0.3"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.8"/>
+            <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+        </inertial>
+    </link>
+
+    <!-- Gripper Base -->
+    <link name="gripper_base">
+        <visual>
+            <geometry>
+                <box size="0.1 0.1 0.1"/>
+            </geometry>
+            <material name="white">
+                <color rgba="1 1 1 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.1 0.1"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.5"/>
+            <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+        </inertial>
+    </link>
+
+    <!-- Joints -->
+    <joint name="base_to_arm" type="continuous">
+        <parent link="base_link"/>
+        <child link="arm_base"/>
+        <origin xyz="0 0 0.15"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <joint name="shoulder" type="revolute">
+        <parent link="arm_base"/>
+        <child link="upper_arm"/>
+        <origin xyz="0 0 0.2"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="-1.57" upper="1.57" effort="100" velocity="1"/>
+    </joint>
+
+    <joint name="elbow" type="revolute">
+        <parent link="upper_arm"/>
+        <child link="forearm"/>
+        <origin xyz="0 0 0.4"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="-1.57" upper="1.57" effort="100" velocity="1"/>
+    </joint>
+
+    <joint name="wrist" type="revolute">
+        <parent link="forearm"/>
+        <child link="gripper_base"/>
+        <origin xyz="0 0 0.3"/>
+        <axis xyz="1 0 0"/>
+        <limit lower="-1.57" upper="1.57" effort="100" velocity="1"/>
+    </joint>
+</robot> 

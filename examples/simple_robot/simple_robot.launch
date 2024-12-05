@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Load robot description -->
+    <param name="robot_description" textfile="$(find robot_template)/examples/simple_robot/robot.urdf" />
+
+    <!-- Start RViz with custom configuration -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_template)/config/robot_view.rviz" />
+
+    <!-- Start joint state publisher with GUI -->
+    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui">
+        <param name="rate" value="50"/>
+    </node>
+    
+    <!-- Start robot state publisher -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+        <param name="publish_frequency" value="50"/>
+    </node>
+
+    <!-- Launch Gazebo with empty world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+    </include>
+
+    <!-- Spawn robot in Gazebo -->
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" 
+          args="-param robot_description -urdf -model simple_manipulator" />
+
+    <!-- Start RQT with useful plugins -->
+    <node name="rqt_graph" pkg="rqt_graph" type="rqt_graph" />
+    <node name="rqt_console" pkg="rqt_console" type="rqt_console" />
+    <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" />
+</launch> 

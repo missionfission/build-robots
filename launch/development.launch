@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Load robot description -->
+    <param name="robot_description" textfile="$(find robot_template)/urdf/robot.urdf" />
+
+    <!-- Start RViz with custom configuration -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_template)/config/robot_view.rviz" />
+
+    <!-- Start joint state publisher -->
+    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+    <!-- Launch Gazebo simulation -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+    </include>
+
+    <!-- Spawn robot in Gazebo -->
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" 
+          args="-param robot_description -urdf -model robot" />
+
+    <!-- Start RQT with default plugins -->
+    <node name="rqt_graph" pkg="rqt_graph" type="rqt_graph" />
+    <node name="rqt_console" pkg="rqt_console" type="rqt_console" />
+</launch> 
