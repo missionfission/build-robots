@@ -1,0 +1,17 @@
+Tamiya Biped Robot Kit: https://www.amazon.com/dp/B0006N6WE6
+Dynamixel XL-320 Servo Motor: https://www.robotshop.com/en/dynamixel-xl-320.html
+Arduino Uno R3 Starter Kit: https://store.arduino.cc/products/arduino-starter-kit
+Raspberry Pi 4 Model B: https://www.raspberrypi.org/products/raspberry-pi-4-model-b/
+Raspberry Pi Camera Module: https://www.raspberrypi.org/products/camera-module-v2/
+Google AIY Voice Kit: https://aiyprojects.withgoogle.com/voice/
+NVIDIA Jetson Nano Developer Kit: https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-nano/
+Ultrasonic Sensor HC-SR04: https://www.sparkfun.com/products/15569
+LiPo Battery Pack 11.1V: https://www.adafruit.com/product/354
+Adafruit Soldering Kit: https://www.adafruit.com/product/136
+Adafruit LiPo Battery Pack 11.1V 2200mAh: https://www.adafruit.com/product/354
+Pololu DC-DC Step-Down Voltage Regulator: https://www.pololu.com/product/3785
+IMAX B6 Balance Charger: https://www.amazon.com/dp/B07S3SBL5W
+Robotis Bioloid Frame Set: https://www.robotshop.com/en/bioloid-frame-set.html
+PLA Filament for 3D Printing: https://www.amazon.com/dp/B08KFRHZ6Y
+Tamiya 70098 Universal Plate: https://www.amazon.com/dp/B000BRBDHM
+MakerFocus Power Distribution Board: https://www.amazon.com/dp/B07B9LZ9V6
