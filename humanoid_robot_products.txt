@@ -15,3 +15,17 @@ Robotis Bioloid Frame Set: https://www.robotshop.com/en/bioloid-frame-set.html
 PLA Filament for 3D Printing: https://www.amazon.com/dp/B08KFRHZ6Y
 Tamiya 70098 Universal Plate: https://www.amazon.com/dp/B000BRBDHM
 MakerFocus Power Distribution Board: https://www.amazon.com/dp/B07B9LZ9V6
+
+("FESTO Pneumatic Muscles", "https://www.festo.com/us/en/"),
+("Silicone Tubing", "https://www.mcmaster.com/silicone-tubing"),
+("Solenoid Valve 12V", "https://www.sparkfun.com/products/10456"),
+("Diaphragm Water Pump (500-watt)", "https://www.amazon.com/dp/B08CXFM8HT"),
+("Epoxy Resin", "https://www.amazon.com/dp/B08D6MM9X1"),
+("Nylon Filament for 3D Printing", "https://www.amazon.com/dp/B08JQQYF1D"),
+("Reinforced PVC Tubing", "https://www.mcmaster.com/pvc-tubing"),
+("Hydraulic Gear Pump", "https://www.northerntool.com/shop/tools/product_200330876_200330876"),
+("Hydraulic Reservoir Tank", "https://www.amazon.com/dp/B07W6N8M7L"),
+("Hydraulic Solenoid Valve", "https://www.northerntool.com/shop/tools/product_200330872_200330872"),
+("Adafruit Pressure Sensor", "https://www.adafruit.com/product/3965"),
+("Arduino Mega 2560", "https://store.arduino.cc/products/arduino-mega-2560-rev3"),
+("MeanWell 500W Power Supply", "https://www.digikey.com/products/en?keywords=MeanWell%20500W")
