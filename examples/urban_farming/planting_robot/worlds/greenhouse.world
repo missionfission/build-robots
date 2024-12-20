@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="greenhouse_world">
+    <!-- Physics -->
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <!-- Light -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Ground Plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Greenhouse Structure -->
+    <model name="greenhouse">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      
+      <!-- Floor -->
+      <link name="floor">
+        <collision name="floor_collision">
+          <geometry>
+            <box>
+              <size>20.0 10.0 0.1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="floor_visual">
+          <geometry>
+            <box>
+              <size>20.0 10.0 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.3 0.3 0.3 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Planting Rows -->
+      <link name="planting_rows">
+        <collision name="row1">
+          <pose>-4 0 0.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 8.0 0.2</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="row1_visual">
+          <pose>-4 0 0.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 8.0 0.2</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.4 0.2 1</ambient>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Lighting -->
+      <light name="grow_light_1" type="point">
+        <pose>0 0 3 0 0 0</pose>
+        <diffuse>0.8 0.8 0.5 1</diffuse>
+        <specular>0.2 0.2 0.2 1</specular>
+        <attenuation>
+          <range>20</range>
+          <constant>0.5</constant>
+          <linear>0.01</linear>
+          <quadratic>0.001</quadratic>
+        </attenuation>
+        <cast_shadows>true</cast_shadows>
+      </light>
+    </model>
+
+    <!-- Environment Properties -->
+    <scene>
+      <ambient>0.8 0.8 0.8 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!-- Wind -->
+    <wind>
+      <linear_velocity>0.5 0 0</linear_velocity>
+    </wind>
+
+  </world>
+</sdf> 
