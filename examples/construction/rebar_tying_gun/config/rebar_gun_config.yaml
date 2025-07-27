@@ -1,0 +1,220 @@
+# Rebar Tying Gun Configuration
+# Phase 1: Rebar Tying Assistive Gun for Real Estate Sites
+
+# System Configuration
+system:
+  name: "Rebar Tying Assistive Gun"
+  version: "1.0.0"
+  manufacturer: "Construction Robotics Inc."
+  model: "RTG-2024"
+
+# Hardware Configuration
+hardware:
+  # Motor specifications
+  tying_motor:
+    type: "servo"
+    max_speed: 300.0  # RPM
+    max_torque: 5.0   # Nm
+    encoder_resolution: 4096
+    
+  wire_feed_motor:
+    type: "stepper"
+    steps_per_revolution: 200
+    max_speed: 1000.0  # steps/sec
+    acceleration: 500.0  # steps/sec²
+    
+  cutting_mechanism:
+    type: "solenoid"
+    voltage: 12.0  # V
+    current: 2.0   # A
+    activation_time: 0.2  # seconds
+
+# Battery Configuration
+battery:
+  type: "Li-Ion"
+  voltage: 18.0  # V
+  capacity: 5.0  # Ah
+  low_battery_threshold: 20.0  # %
+  critical_battery_threshold: 10.0  # %
+
+# Wire Configuration
+wire:
+  gauge_range: [16, 20]  # AWG
+  material: "steel"
+  spool_capacity: 100.0  # meters
+  low_wire_threshold: 10.0  # %
+  
+# Tying Parameters
+tying:
+  default_tension: 75.0  # % of maximum
+  tie_rotations: 3.5     # number of rotations
+  tie_speed: 2.0         # rotations per second
+  pre_tension_delay: 0.5 # seconds
+  post_tie_delay: 0.3    # seconds
+  
+# Computer Vision Configuration
+vision:
+  camera:
+    resolution: [640, 480]
+    framerate: 30  # fps
+    exposure: "auto"
+    white_balance: "auto"
+    
+  detection:
+    # Rebar detection parameters
+    min_line_length: 50    # pixels
+    max_line_gap: 10       # pixels
+    hough_threshold: 50
+    canny_low: 50
+    canny_high: 150
+    
+    # Intersection detection
+    intersection_tolerance: 20  # pixels
+    min_intersection_angle: 30  # degrees
+    max_intersection_angle: 150 # degrees
+    
+    # Filtering
+    min_confidence: 0.7
+    temporal_smoothing: True
+    smoothing_window: 5  # frames
+
+# Safety Configuration
+safety:
+  emergency_stop:
+    enabled: True
+    button_type: "normally_closed"
+    
+  force_limits:
+    max_grip_force: 50.0   # N
+    max_tie_torque: 5.0    # Nm
+    
+  operational_limits:
+    max_continuous_runtime: 8.0  # hours
+    max_ties_per_session: 1000
+    overheat_temperature: 70.0   # °C
+    
+  user_safety:
+    grip_detection: True
+    proper_positioning_check: True
+    safety_zone_monitoring: True
+
+# User Interface Configuration
+ui:
+  display:
+    type: "LED"
+    brightness: 80  # %
+    
+  indicators:
+    power_led: "green"
+    battery_led: "multi_color"
+    status_led: "multi_color"
+    error_led: "red"
+    
+  feedback:
+    vibration_enabled: True
+    audio_enabled: True
+    volume: 70  # %
+
+# Communication Configuration
+communication:
+  ros_topics:
+    status: "/rebar_gun/status"
+    trigger: "/rebar_gun/trigger"
+    mode: "/rebar_gun/mode"
+    emergency_stop: "/rebar_gun/emergency_stop"
+    camera_feed: "/rebar_gun/camera/image_raw"
+    tie_command: "/rebar_gun/tie_command"
+    wire_feed: "/rebar_gun/wire_feed"
+    motor_control: "/rebar_gun/motor_control"
+    
+  update_rates:
+    status_rate: 10.0      # Hz
+    camera_rate: 30.0      # Hz
+    control_rate: 100.0    # Hz
+
+# Operation Modes
+modes:
+  assisted:
+    description: "User positions gun, automatic tie execution"
+    auto_trigger: False
+    position_assistance: True
+    visual_feedback: True
+    
+  semi_automatic:
+    description: "Continuous operation with intersection detection"
+    auto_trigger: True
+    position_assistance: True
+    hands_free: True
+    
+  manual:
+    description: "Full manual control"
+    auto_trigger: False
+    position_assistance: False
+    debug_mode: True
+
+# Quality Control
+quality:
+  tie_verification:
+    enabled: True
+    force_check: True
+    visual_inspection: False  # Future feature
+    
+  statistics:
+    track_tie_count: True
+    track_success_rate: True
+    track_battery_usage: True
+    track_wire_usage: True
+
+# Maintenance
+maintenance:
+  service_intervals:
+    daily_check: 8.0       # hours
+    weekly_service: 40.0   # hours
+    monthly_service: 160.0 # hours
+    
+  wear_monitoring:
+    cutting_blade: True
+    wire_feed_mechanism: True
+    motor_brushes: True
+    
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARN, ERROR
+  file_logging: True
+  log_directory: "/tmp/rebar_gun_logs"
+  max_log_size: 100  # MB
+  max_log_files: 10
+  
+  log_events:
+    - "tie_completion"
+    - "errors"
+    - "mode_changes"
+    - "battery_status"
+    - "wire_status"
+
+# Calibration
+calibration:
+  camera:
+    enabled: True
+    calibration_file: "camera_calibration.yaml"
+    
+  motors:
+    tying_motor_offset: 0.0      # degrees
+    wire_feed_calibration: 1.0   # mm/step
+    
+  sensors:
+    force_sensor_offset: 0.0     # N
+    position_sensor_offset: 0.0  # mm
+
+# Performance Metrics
+performance:
+  target_metrics:
+    ties_per_hour: 1200
+    battery_life: 8.0      # hours
+    success_rate: 95.0     # %
+    positioning_accuracy: 5.0  # mm
+    
+  monitoring:
+    real_time_metrics: True
+    performance_logging: True
+    efficiency_tracking: True
