@@ -1,0 +1,338 @@
+# Plastering Robot Arm Configuration
+# Phase 2: Plastering Robot Arm (Teleoperated) for Urban Infrastructure
+
+# System Configuration
+system:
+  name: "Plastering Robot Arm"
+  version: "2.0.0"
+  manufacturer: "Construction Robotics Inc."
+  model: "PRA-2024"
+
+# Robot Configuration
+robot:
+  type: "6-DOF Industrial Arm"
+  manufacturer: "Universal Robots"
+  model: "UR10e"
+  payload: 12.5  # kg
+  reach: 1.3     # meters
+  repeatability: 0.1  # mm
+
+# Tool Configuration
+tools:
+  spray_system:
+    type: "pneumatic_spray"
+    max_pressure: 8.0      # bar
+    max_flow_rate: 5.0     # L/min
+    nozzle_diameter: 2.0   # mm
+    spray_pattern: "circular"
+    coverage_width: 0.3    # meters
+    
+  trowel_system:
+    type: "vibrating_trowel"
+    blade_width: 0.2       # meters
+    vibration_frequency: 60 # Hz
+    pressure_range: [5, 50] # N
+    
+  mixing_system:
+    tank_capacity: 50.0    # liters
+    mixing_speed: 100      # RPM
+    mixing_time: 120       # seconds
+    material_types:
+      - "cement_plaster"
+      - "gypsum_plaster"
+      - "lime_plaster"
+      - "acrylic_plaster"
+
+# Material Configuration
+materials:
+  cement_plaster:
+    density: 1800          # kg/m³
+    viscosity: "medium"
+    application_thickness: [10, 25]  # mm
+    drying_time: 1800      # seconds
+    
+  gypsum_plaster:
+    density: 1200          # kg/m³
+    viscosity: "low"
+    application_thickness: [5, 15]   # mm
+    drying_time: 900       # seconds
+    
+  lime_plaster:
+    density: 1600          # kg/m³
+    viscosity: "high"
+    application_thickness: [8, 20]   # mm
+    drying_time: 3600      # seconds
+
+# Teleoperation Configuration
+teleoperation:
+  interfaces:
+    joystick:
+      type: "SpaceMouse"
+      sensitivity: 0.5
+      dead_zone: 0.1
+      max_velocity: 0.1    # m/s
+      max_angular_velocity: 0.5  # rad/s
+      
+    vr_headset:
+      type: "Oculus Quest 2"
+      tracking_space: 3.0  # meters
+      hand_tracking: True
+      haptic_feedback: True
+      
+    tablet:
+      resolution: [1920, 1080]
+      touch_sensitivity: 0.8
+      gesture_recognition: True
+      
+  force_feedback:
+    enabled: True
+    max_force: 50.0        # N
+    force_scaling: 0.1
+    haptic_update_rate: 1000  # Hz
+    
+  safety_limits:
+    max_velocity: 0.2      # m/s
+    max_acceleration: 0.5  # m/s²
+    workspace_limits:
+      x_min: -1.5
+      x_max: 1.5
+      y_min: -1.5
+      y_max: 1.5
+      z_min: 0.0
+      z_max: 2.5
+
+# Surface Analysis Configuration
+surface_analysis:
+  scanner:
+    type: "structured_light"
+    resolution: 0.001      # meters (1mm)
+    scan_range: 2.0        # meters
+    accuracy: 0.5          # mm
+    
+  processing:
+    surface_normal_calculation: True
+    roughness_analysis: True
+    defect_detection: True
+    thickness_measurement: True
+    
+  quality_metrics:
+    roughness_threshold: 0.5    # mm
+    thickness_tolerance: 2.0    # mm
+    coverage_requirement: 95.0  # %
+
+# Motion Planning Configuration
+motion_planning:
+  planner: "RRTConnect"
+  planning_time: 5.0       # seconds
+  planning_attempts: 10
+  
+  constraints:
+    orientation_tolerance: 0.1   # radians
+    position_tolerance: 0.005    # meters
+    
+  trajectory:
+    max_velocity_scaling: 0.3
+    max_acceleration_scaling: 0.3
+    trajectory_smoothing: True
+
+# Application Parameters
+application:
+  spray_parameters:
+    default_pressure: 4.0    # bar
+    default_flow_rate: 2.0   # L/min
+    spray_distance: 0.3      # meters
+    overlap_percentage: 20   # %
+    application_speed: 0.1   # m/s
+    
+  trowel_parameters:
+    contact_force: 20.0      # N
+    smoothing_speed: 0.05    # m/s
+    pattern_overlap: 10      # %
+    finishing_passes: 2
+    
+  thickness_control:
+    target_thickness: 15.0   # mm
+    thickness_tolerance: 2.0 # mm
+    measurement_frequency: 10 # points per m²
+
+# Safety Configuration
+safety:
+  emergency_stop:
+    hardware_button: True
+    software_button: True
+    wireless_pendant: True
+    
+  collision_detection:
+    enabled: True
+    sensitivity: 0.1
+    stop_distance: 0.05    # meters
+    
+  force_monitoring:
+    max_contact_force: 50.0  # N
+    force_threshold: 30.0    # N
+    force_timeout: 1.0       # seconds
+    
+  workspace_monitoring:
+    virtual_fences: True
+    human_detection: True
+    exclusion_zones: True
+    
+  material_safety:
+    pressure_monitoring: True
+    leak_detection: True
+    ventilation_monitoring: True
+
+# Quality Control
+quality_control:
+  inspection:
+    automated_inspection: True
+    inspection_frequency: 10   # every N points
+    defect_classification: True
+    
+  measurements:
+    thickness_measurement: True
+    surface_roughness: True
+    coverage_analysis: True
+    adhesion_testing: False   # Manual process
+    
+  standards:
+    iso_compliance: "ISO 13311"
+    astm_compliance: "ASTM C926"
+    
+  thresholds:
+    min_thickness: 8.0       # mm
+    max_thickness: 30.0      # mm
+    max_roughness: 1.0       # mm
+    min_coverage: 95.0       # %
+
+# Performance Monitoring
+performance:
+  metrics:
+    application_rate: 15.0   # m²/hour
+    material_efficiency: 90.0 # %
+    quality_score: 95.0      # %
+    uptime: 85.0            # %
+    
+  tracking:
+    area_coverage: True
+    material_usage: True
+    time_efficiency: True
+    error_rates: True
+    
+  optimization:
+    path_optimization: True
+    speed_optimization: True
+    material_optimization: True
+
+# Communication Configuration
+communication:
+  ros_topics:
+    # Control topics
+    arm_command: "/teleop/arm_command"
+    joint_states: "/joint_states"
+    tool_control: "/plastering/tool_control"
+    
+    # Sensor topics
+    force_torque: "/sensors/force_torque"
+    surface_scan: "/sensors/surface_scan"
+    camera_feed: "/cameras/surface_camera"
+    
+    # Status topics
+    system_status: "/plastering/status"
+    quality_metrics: "/plastering/quality_metrics"
+    emergency_stop: "/plastering/emergency_stop"
+    
+  update_rates:
+    control_rate: 125.0      # Hz
+    sensor_rate: 100.0       # Hz
+    status_rate: 10.0        # Hz
+    camera_rate: 30.0        # Hz
+
+# User Interface
+user_interface:
+  display:
+    type: "touchscreen"
+    size: 15.0             # inches
+    resolution: [1920, 1080]
+    
+  controls:
+    mode_selection: True
+    parameter_adjustment: True
+    status_monitoring: True
+    emergency_controls: True
+    
+  visualization:
+    3d_workspace: True
+    real_time_feedback: True
+    progress_tracking: True
+    quality_overlay: True
+
+# Data Logging
+logging:
+  enabled: True
+  log_level: "INFO"
+  log_directory: "/tmp/plastering_logs"
+  
+  data_types:
+    - "joint_positions"
+    - "force_measurements"
+    - "surface_scans"
+    - "quality_metrics"
+    - "material_usage"
+    - "error_events"
+    
+  storage:
+    max_log_size: 500      # MB
+    max_log_files: 20
+    compression: True
+    cloud_backup: False
+
+# Maintenance
+maintenance:
+  scheduled_maintenance:
+    daily_check: True
+    weekly_service: True
+    monthly_calibration: True
+    
+  predictive_maintenance:
+    wear_monitoring: True
+    performance_degradation: True
+    failure_prediction: True
+    
+  service_intervals:
+    tool_cleaning: 4.0     # hours
+    system_calibration: 40.0 # hours
+    major_service: 200.0   # hours
+
+# Teaching Mode Configuration
+teaching_mode:
+  gravity_compensation: True
+  force_guidance: True
+  trajectory_recording: True
+  
+  recording:
+    sample_rate: 10.0      # Hz
+    smoothing_enabled: True
+    waypoint_optimization: True
+    
+  playback:
+    speed_scaling: 0.5
+    force_adaptation: True
+    collision_monitoring: True
+
+# Network Configuration
+network:
+  robot_ip: "192.168.1.100"
+  control_port: 30002
+  dashboard_port: 29999
+  
+  wireless:
+    enabled: True
+    ssid: "ConstructionRobotics"
+    security: "WPA2"
+    
+  remote_access:
+    vpn_enabled: False
+    ssh_enabled: True
+    web_interface: True
+    port: 8080
